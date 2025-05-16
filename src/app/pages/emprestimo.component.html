@@ -1,0 +1,25 @@
+<main>
+  <div class="card-glass">
+    <h2>Solicitar Empréstimo</h2>
+    <form>
+      <label>Valor desejado (R$):</label>
+      <input type="number" [(ngModel)]="valor" name="valor" /><br />
+      <label>Moeda:</label>
+      <select [(ngModel)]="moeda" name="moeda">
+        <option>BRL</option>
+        <option>USD</option>
+        <option>EUR</option>
+        <option>AUD</option>
+      </select><br />
+      <label>Parcelas:</label>
+      <input type="number" [(ngModel)]="parcelas" name="parcelas" /><br />
+      <button (click)="simular()">Simular</button>
+    </form>
+
+    <div *ngIf="resultado">
+      <h3>Simulação</h3>
+      <p>Valor total: R$ {{ resultado.total }}</p>
+      <p>Valor por parcela: R$ {{ resultado.parcela }}</p>
+    </div>
+  </div>
+</main>

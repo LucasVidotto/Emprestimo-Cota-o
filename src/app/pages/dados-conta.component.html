@@ -1,0 +1,19 @@
+<main>
+  <div class="card-glass">
+    <div class="card-header">
+      <h2> Detalhes da Conta</h2>
+    </div>
+
+    <div class="divider" *ngIf="conta$ | async as conta">
+
+      <span>Conta : {{conta.conta}}</span>
+      <div></div>
+      <span>Saldo Conta : R$ {{conta.saldo}}</span>
+      <div></div>
+      <span>Nome: L{{conta.nome}}</span>
+      <div></div>
+      <span>Email: {{conta.email}}</span>
+    </div>
+
+  </div>
+</main>

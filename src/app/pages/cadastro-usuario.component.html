@@ -1,0 +1,28 @@
+
+<main>
+    <div class="card-glass">
+    <h1>Abertura de Conta</h1>
+     <form>
+      <label>Nome Completo</label>
+      <input type="text" [(ngModel)]="nome" name="nome" placeholder="Fulano " /><br />
+
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Fulano@gmail.com " /><br />
+
+      <label>CPF</label>
+      <input type="text" [(ngModel)]="cpf" name="cpf" placeholder="12312312311" /><br />
+
+      <label>Senha</label>
+      <input type="password" [(ngModel)]="senha" name="senha" placeholder="********" /><br />
+
+      <p class="erro" *ngIf="erro">{{ erro }}</p>
+
+      <button class="button" (click)="abrirConta()">Abrir Conta</button>
+
+      <p class="login-text">
+        Já possui conta?
+        <a routerLink="/login">Logar!</a>
+      </p>
+    </form>
+   </div>
+</main>

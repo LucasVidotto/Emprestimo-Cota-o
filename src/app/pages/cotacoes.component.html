@@ -1,0 +1,11 @@
+<main>
+  <app-navbar />
+  <div class="card-glass">
+    <h2>Cotações das Moedas</h2>
+    <ul>
+      <li *ngFor="let moeda of moedas">
+        {{ moeda.nome }}: R$ {{ moeda.valor | number: '1.2-2' }}
+      </li>
+    </ul>
+  </div>
+</main>

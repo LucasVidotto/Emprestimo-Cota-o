@@ -1,0 +1,30 @@
+nav{
+  display:flex;
+  position: absolute;
+  top:4%;
+  left:30%;
+  width: 600px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: trasnaprent;
+
+  .bar-nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width: calc(25% - 10px);
+    height: 100%;
+    background: rgba(10,10,10,0.3);
+    border-radius: 10px;
+    transition: transform 0.7s;
+      a{
+        text-decoration: none;
+        color: white;
+      }
+  }
+  .bar-nav:hover{
+    transform: rotate(10deg) scale(110%);
+
+  }
+}
