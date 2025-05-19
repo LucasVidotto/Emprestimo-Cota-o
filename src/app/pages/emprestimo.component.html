@@ -1,4 +1,5 @@
 <main>
+  <app-navbar/>
   <div class="card-glass">
     <h2>Solicitar Empréstimo</h2>
     <form>
@@ -13,7 +14,9 @@
       </select><br />
       <label>Parcelas:</label>
       <input type="number" [(ngModel)]="parcelas" name="parcelas" /><br />
-      <button (click)="simular()">Simular</button>
+
+      <p class="erro" *ngIf="erro">{{ erro }}</p>
+      <button class="button" (click)="pegarEmprestimo()">Simular</button>
     </form>
 
     <div *ngIf="resultado">

@@ -1,27 +1,25 @@
-
 <main>
-    <div class="card-glass">
+  <div class="card-glass">
     <h1>Entrar na Conta</h1>
-     <form>
+    <form (ngSubmit)="login()">
       <label>CPF</label>
       <div class="input-wrapper">
         <i class="fa fa-id-card"></i>
-        <input type="text" name="cpf" placeholder="Informe o CPF" />
+        <input type="text" name="cpf" [(ngModel)]="cpf" placeholder="Informe o CPF" required />
       </div>
 
       <label>Senha</label>
       <div class="input-wrapper">
         <i class="fa fa-lock"></i>
-        <input type="password" name="senha" placeholder="Informe a Senha" />
+        <input type="password" name="senha" [(ngModel)]="senha" placeholder="Informe a Senha" required />
       </div>
 
-      <button class="button" >Conectar</button>
+      <button class="button" type="submit">Conectar</button>
 
       <p class="login-text">
         Não possui conta?
         <a routerLink="/cadastro-usuario">Crie uma aqui</a>
       </p>
     </form>
-   </div>
+  </div>
 </main>
-

@@ -17,19 +17,24 @@ export class CotacoesComponent implements OnInit {
 
   ngOnInit() {
     const dataHoje = new Date();
-    const dataFormatada = this.formatarData(dataHoje); // 'MM-DD-YYYY'
+    const dataFormatada = this.formatarDataUtilMaisRecente(dataHoje);
 
     this.buscarCotacaoPTAX('USD', dataFormatada);
     this.buscarCotacaoPTAX('EUR', dataFormatada);
     this.buscarCotacaoPTAX('AUD', dataFormatada);
   }
 
-  private formatarData(data: Date): string {
-    const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0');
-    const ano = data.getFullYear();
-    return `${mes}-${dia}-${ano}`; // Formato: MM-DD-YYYY
-  }
+ private formatarDataUtilMaisRecente(data: Date): string {
+  data.setDate(data.getDate() - 1);
+  const diaSemana = data.getDay();
+  if (diaSemana === 0) data.setDate(data.getDate() - 2); // domingo
+  else if (diaSemana === 6) data.setDate(data.getDate() - 1); // sábado
+
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0');
+  const ano = data.getFullYear();
+  return `${mes}-${dia}-${ano}`;
+}
 
   private buscarCotacaoPTAX(sigla: string, data: string) {
     const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='${sigla}'&@dataCotacao='${data}'&$format=json`;

@@ -4,16 +4,33 @@
     <h1>Abertura de Conta</h1>
      <form>
       <label>Nome Completo</label>
-      <input type="text" [(ngModel)]="nome" name="nome" placeholder="Fulano " /><br />
 
+      <div class="input-wrapper">
+        <i class="fa fa-id-card"></i>
+        <input type="text" [(ngModel)]="nome" name="nome" placeholder="Fulano " /><br />
+      </div>
       <label>Email</label>
-      <input type="email" [(ngModel)]="email" name="email" placeholder="Fulano@gmail.com " /><br />
-
+      <div class="input-wrapper">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Fulano@gmail.com " /><br />
+      </div>
       <label>CPF</label>
-      <input type="text" [(ngModel)]="cpf" name="cpf" placeholder="12312312311" /><br />
-
+      <div class="input-wrapper">
+        <i class="fa-solid fa-address-card"></i>
+        <input type="text" [(ngModel)]="cpf" name="cpf" placeholder="12312312311" /><br />
+      </div>
       <label>Senha</label>
-      <input type="password" [(ngModel)]="senha" name="senha" placeholder="********" /><br />
+      <div class="input-wrapper">
+        <i class="fa fa-lock"></i>
+        <input
+          [attr.type]="itemSenha ? 'text' : 'password'"
+          [(ngModel)]="senha"
+          name="senha" placeholder="********" /><br />
+      </div>
+      <div class="open-pass">
+        <i *ngIf="itemSenha" class="fa-solid fa-eye" (click)="openClosed()"></i>
+        <i *ngIf="!itemSenha" class="fa-solid fa-eye-slash" (click)="openClosed()"></i>
+      </div>
 
       <p class="erro" *ngIf="erro">{{ erro }}</p>
 

@@ -32,6 +32,11 @@ export const routes: Routes = [
       import('./pages/dados-conta.component').then(m=> m.DadosContaComponent)
   },
   {
+    path:'dados-emprestimo',
+    loadComponent: () =>
+      import('./pages/informacoes/dados-emprestimo.component').then(m=> m.DadosEmprestimoComponent)
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/notfound.component').then(m => m.NotfoundComponent)

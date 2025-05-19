@@ -1,0 +1,28 @@
+<main>
+  <app-navbar/>
+  <div class="card-glass">
+    <div class="card-header">
+      <h1> Detalhes do Emprestimo</h1>
+    </div>
+
+    <div class="divider" *ngIf="emprestimo$ | async as emprestimo">
+      <span>CPF : {{emprestimo.cpf}}</span>
+      <div></div>
+      @if(emprestimo.tipoMoeda == 'USD'){
+        <span>Valor do Emprestimo : $ {{emprestimo.valor}}</span>
+      }@else if(emprestimo.tipoMoeda == 'BRL'){
+        <span>Valor do Emprestimo : R$ {{emprestimo.valor}}</span>
+      }@else if(emprestimo.tipoMoeda == 'EUR'){
+        <span>Valor do Emprestimo : € {{emprestimo.valor}}</span>
+      }
+      <div></div>
+      <span>Data da Divida: {{emprestimo.dataEmprestimo}}</span>
+      <div></div>
+      <span>Total Parcelas: {{emprestimo.parcelas}}</span>
+       <div></div>
+      <span>Moeda Solicitada: {{emprestimo.tipoMoeda }}</span>
+      <div></div>
+      <span>Total com Juros: {{(emprestimo.valor/emprestimo.parcelas) *1.22 | number:'1.2-2'}}</span>
+    </div>
+  </div>
+</main>

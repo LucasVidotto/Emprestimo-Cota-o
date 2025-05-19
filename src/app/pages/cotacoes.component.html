@@ -1,7 +1,7 @@
 <main>
   <app-navbar />
   <div class="card-glass">
-    <h2>Cotações das Moedas</h2>
+    <h1>Cotações das Moedas</h1>
     <ul>
       <li *ngFor="let moeda of moedas">
         {{ moeda.nome }}: R$ {{ moeda.valor | number: '1.2-2' }}

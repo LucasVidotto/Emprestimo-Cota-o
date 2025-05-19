@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from "../components/navbar.component";
+import { ContaStore } from '../store/conta.store';
 import { ContaMock } from '../Data/Dados'; // Caminho conforme seu projeto
-import { RouterModule } from '@angular/router';
+import { RouterModule,Router } from '@angular/router';
+
 
 @Component({
   standalone: true,
@@ -12,8 +13,12 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './cadastro-usuario.component.html',
   styleUrl: './cadastro-usuario.component.css'
+
 })
 export class CadastroUsuarioComponent {
+
+  constructor(private contaStore: ContaStore, private router: Router) {}
+
   private http = inject(HttpClient)
 
   // Usando os dados do mock
@@ -24,6 +29,13 @@ export class CadastroUsuarioComponent {
   tipoConta = ContaMock.tipoConta;
   saldo = ContaMock.saldo;
   erro : string = '';
+  itemSenha = false;
+
+  openClosed(){
+    this.itemSenha = !this.itemSenha;
+    console.log(this.itemSenha)
+  }
+
   private cadastrar() {
     const url = `http://localhost:8080/cadastro`;
 
@@ -58,6 +70,10 @@ export class CadastroUsuarioComponent {
     }else if(this.cpf.length != 11){
       this.erro = 'CPF deve contem 11 números'
       return;
+    }else if(localStorage.getItem(this.cpf)){
+      this.erro = 'CPF já cadastrado'
+      return;
+
     }
 
     this.erro = "";
@@ -68,11 +84,14 @@ export class CadastroUsuarioComponent {
     cpf: this.cpf,
     senha: this.senha,
     tipoConta: this.tipoConta,
-    saldo: this.saldo,
+    saldo: 3000,
+   };
 
-  };
 
-  localStorage.setItem('contaUsuario', JSON.stringify(conta));
-  console.log('Conta salva localmente:', conta);
-}
+    localStorage.setItem(this.cpf, JSON.stringify(conta));
+    localStorage.setItem(`logado`, JSON.stringify(this.cpf));
+/*     this.contaStore.setConta(conta); */
+    console.log('Conta salva localmente:', conta);
+    this.router.navigate(["./dados-conta"]);
+  }
 }

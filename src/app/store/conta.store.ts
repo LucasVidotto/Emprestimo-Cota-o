@@ -7,6 +7,8 @@ export interface Conta {
   email: string;
   saldo: string;
   conta:string;
+  cpf: string;
+  tipoConta:string;
 }
 
 @Injectable({
@@ -16,8 +18,10 @@ export class ContaStore {
   private _conta = new BehaviorSubject<Conta>({
     nome: 'Lucas Vidotto',
     email: 'lucasvidotto@gmail.com',
+    cpf: 'string',
     saldo: '7000,00',
     conta: '1234-5',
+    tipoConta: '',
   });
 
   readonly conta$ = this._conta.asObservable();

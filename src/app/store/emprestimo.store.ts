@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface Emprestimo {
-  nome: string;
-  email: string;
-  saldo: string;
-  conta:string;
-  dividaTotal: number;
+  cpf: string;
+  valor: number;
+  parcelas: number;
+  dataEmprestimo: Date;
+  tipoMoeda: string;
 }
 
 @Injectable({
@@ -15,11 +15,11 @@ export interface Emprestimo {
 })
 export class EmprestimoStore {
   private _emprestimo= new BehaviorSubject<Emprestimo>({
-    nome: 'Lucas Vidotto',
-    email: 'lucasvidotto@gmail.com',
-    saldo: '1000,00',
-    conta: '1234-5',
-    dividaTotal: 0,
+    cpf: '00000000',
+    valor: 0,
+    parcelas:4,
+    dataEmprestimo: new Date,
+    tipoMoeda: 'EUA',
   });
 
   readonly emprestimo$ = this._emprestimo.asObservable();
@@ -32,7 +32,7 @@ export class EmprestimoStore {
     this._emprestimo.next(novoEmprestimo);
   }
 
-  atualizarDivida(totalDivida: number) {
-    this._emprestimo.next({ ...this._emprestimo.value, dividaTotal: totalDivida });
+  atualizarDivida(valor: number) {
+    this._emprestimo.next({ ...this._emprestimo.value, valor: valor });
   }
 }
