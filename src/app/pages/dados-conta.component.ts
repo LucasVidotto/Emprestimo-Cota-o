@@ -14,7 +14,7 @@ export class DadosContaComponent {
 
   constructor(private contaStore: ContaStore){}
 
-  ngOnInit() {
+  ngOnInit() {//ecebe dados do usuiário logado antes de renderizar
   const cpfLogado = localStorage.getItem('logado');
   if(cpfLogado){
     for(let i = 0; i < localStorage.length; i++){
@@ -25,7 +25,7 @@ export class DadosContaComponent {
         console.log('Conta logada:', conta);
         this.contaStore.setConta(conta);
         // Ex: this.nome = conta.nome;
-        break; // Para evitar continuar o loop após encontrar a conta
+        break;
       }
     }
   }

@@ -1,5 +1,12 @@
 <main>
   <app-navbar/>
+   <app-notificar
+     [valor]="emprestimos.valor"
+    [parcelas]="emprestimos.parcelas"
+    [dataEmprestimo]="emprestimos.dataEmprestimo"
+    *ngIf="notificarFechado"
+    (fecharNotificacao)="onNotificacaoFechada($event)">
+  </app-notificar>
   <div class="card-glass">
     <div class="card-header">
       <h1> Detalhes do Emprestimo</h1>

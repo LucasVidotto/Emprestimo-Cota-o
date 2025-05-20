@@ -1,18 +1,20 @@
 import { EmprestimoStore } from './../../store/emprestimo.store';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../components/navbar.component";
 import { HttpClientModule,HttpClient } from '@angular/common/http';
+import { NotificarComponent } from "../../components/aviso/notificar.component";
 
 @Component({
   selector: 'app-dados-emprestimo',
-  imports: [CommonModule, NavbarComponent,HttpClientModule],
+  imports: [CommonModule, NavbarComponent, HttpClientModule, NotificarComponent],
   templateUrl: './dados-emprestimo.component.html',
   styleUrl: './dados-emprestimo.component.css'
 })
 export class DadosEmprestimoComponent {
 /* conta = Contas; */
 
+  notificarFechado = true;
   constructor(
     private emprestimoStore: EmprestimoStore,
     private http: HttpClient // injeta o HttpClient
@@ -26,11 +28,10 @@ export class DadosEmprestimoComponent {
       tipoMoeda: 'Real',
     }
 
-  ngOnInit() {
+  ngOnInit() { //puxa os dados do LocalStore e verifica se existe dados naquele cpf do emprestimo
   const cpfLogado = localStorage.getItem('logado');
   const cpfEmprestimo = localStorage.getItem(`emprestimoUsuário${cpfLogado}`);
   if (cpfLogado && cpfEmprestimo) {
-
     this.emprestimos = JSON.parse(cpfEmprestimo);
     console.log('aqui : ', this.emprestimos);
   }
@@ -41,11 +42,15 @@ export class DadosEmprestimoComponent {
   }
 }
 
-  get emprestimo$(){
+  get emprestimo$(){//recebe dados do emprestimo do Store
     return this.emprestimoStore.emprestimo$;
   }
 
-  buscarEmprestimosDaApi() {
+  onNotificacaoFechada(valor:boolean) {//para fechar o aviso
+    this.notificarFechado = valor;
+  }
+
+  buscarEmprestimosDaApi() {//api
     const url = 'http://localhost:8080/emprestimos';
     this.http.get(url).subscribe({
       next: (res) => {

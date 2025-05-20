@@ -16,7 +16,7 @@ export class EmprestimoComponent {
 constructor(private contaStore: ContaStore, private logadoStore:LogadoStore){}
 cpf: string= '';
 cpfLogado : string = '';
-ngOnInit(){
+ngOnInit(){//puxa dados do usuario/emprestimo e logado e verifica se existe dados no localStorage
     const dados = localStorage.getItem('contaUsuario');
 
     if(localStorage.getItem('logado')){
@@ -38,14 +38,14 @@ ngOnInit(){
   resultado: { total: number; parcela: number } | null = null;
   erro: string = '';
 
-private formatarData(data: Date): string {
+private formatarData(data: Date): string {//formata a data para o padrão DD/MM/AAAA
   const dia = String(data.getDate()).padStart(2, '0');
   const mes = String(data.getMonth() + 1).padStart(2, '0'); // Janeiro é 0
   const ano = data.getFullYear();
   return `${dia}/${mes}/${ano}`; // ou `${ano}-${mes}-${dia}` se preferir padrão ISO
 }
 
-  simular() {
+  simular() {//apenas simunlação de emprestimo
     const taxa = this.moeda === 'USD' ? 1.05 : this.moeda === 'EUR' ? 1.08 : this.moeda === 'AUD' ? 1.03 : 1.02;
     const total = this.valor * taxa;
     this.resultado = {
@@ -54,7 +54,7 @@ private formatarData(data: Date): string {
     };
   }
 
-   pegarEmprestimo() {
+   pegarEmprestimo() {//cria a função de pegar emprestimo com algumas validações
     //validação simples
     if(!this.moeda || !this.parcelas || !this.valor ){
       this.erro = 'Por favor, preencha todos os campos obrigatórios'

@@ -31,12 +31,12 @@ export class CadastroUsuarioComponent {
   erro : string = '';
   itemSenha = false;
 
-  openClosed(){
+  openClosed(){//exibir senha
     this.itemSenha = !this.itemSenha;
     console.log(this.itemSenha)
   }
 
-  private cadastrar() {
+  private cadastrar() {//api para cadastro
     const url = `http://localhost:8080/cadastro`;
 
     const payload = {
@@ -58,8 +58,7 @@ export class CadastroUsuarioComponent {
     });
   }
 
-  abrirConta() {
-
+  abrirConta() {//chamada para abrir uma conta, com verificações
     //validação simples
     if(!this.nome || !this.cpf || !this.email ||!this.senha){
       this.erro = 'Por favor, preencha todos os campos obrigatórios'
@@ -73,9 +72,7 @@ export class CadastroUsuarioComponent {
     }else if(localStorage.getItem(this.cpf)){
       this.erro = 'CPF já cadastrado'
       return;
-
     }
-
     this.erro = "";
 
     const conta = {

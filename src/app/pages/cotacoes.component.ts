@@ -15,7 +15,7 @@ export class CotacoesComponent implements OnInit {
 
   private http = inject(HttpClient);
 
-  ngOnInit() {
+  ngOnInit() {//recebe valores como data atual formatada e buscar cotação, antes de renderizar
     const dataHoje = new Date();
     const dataFormatada = this.formatarDataUtilMaisRecente(dataHoje);
 
@@ -24,7 +24,7 @@ export class CotacoesComponent implements OnInit {
     this.buscarCotacaoPTAX('AUD', dataFormatada);
   }
 
- private formatarDataUtilMaisRecente(data: Date): string {
+ private formatarDataUtilMaisRecente(data: Date): string {//formata a data para o padrão MM-DD-AAAA
   data.setDate(data.getDate() - 1);
   const diaSemana = data.getDay();
   if (diaSemana === 0) data.setDate(data.getDate() - 2); // domingo
@@ -36,7 +36,7 @@ export class CotacoesComponent implements OnInit {
   return `${mes}-${dia}-${ano}`;
 }
 
-  private buscarCotacaoPTAX(sigla: string, data: string) {
+  private buscarCotacaoPTAX(sigla: string, data: string) {//busca dados da cotação da API do banco central
     const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='${sigla}'&@dataCotacao='${data}'&$format=json`;
 
     this.http.get<any>(url).subscribe((res) => {
